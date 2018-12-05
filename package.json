@@ -1,0 +1,14 @@
+{
+  "name": "cs5610_tele-connect_server",
+  "version": "1.0.0",
+  "description": "television series discussion board",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "The Laggers",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4"
+  }
+}
