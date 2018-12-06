@@ -1,11 +1,14 @@
 const commentModel = require('../models/comment.model.server');
-
+const mongoose = require('mongoose');
 truncateComments = () =>
-    commentModel.deleteMany()
+    commentModel.deleteMany();
 
-createComment = (userId, movieId, comment) => {
-    comment.user = parseInt(userId);
-    comment.tvseries = parseInt(movieId);
+deleteComment = commentId =>
+    commentModel.deleteOne({_id: mongoose.Types.ObjectId(commentId)});
+
+createComment = (userId, tvseriesId, comment) => {
+    comment.user = mongoose.Types.ObjectId(userId);
+    comment.tvseries = parseInt(tvseriesId);
     return commentModel.create(comment);
 };
 
@@ -17,8 +20,8 @@ findAllComments = () =>
 
 findCommentByUser = userId =>
     commentModel.find({
-        student: {
-            _id: userId
+        user: {
+            _id: mongoose.Types.ObjectId(userId)
         }
     })
         .populate('user')
@@ -39,7 +42,7 @@ findCommentByUserTVSeries = (userId, tvseriesId) =>
     commentModel.find({
         $and: [{
             user: {
-                _id: parseInt(userId)
+                _id: mongoose.Types.ObjectId(userId)
             }
         }, {
             tvseries: {
@@ -52,11 +55,18 @@ findCommentByUserTVSeries = (userId, tvseriesId) =>
         .populate('tvseries')
         .exec();
 
+updateComment = (commentId, comment) =>
+    commentModel.updateOne(
+        {_id: mongoose.Types.ObjectId(commentId)},
+        {$set: comment});
+
 module.exports = {
     truncateComments,
     createComment,
     findAllComments,
     findCommentByUser,
     findCommentByTVSeries,
-    findCommentByUserTVSeries
+    findCommentByUserTVSeries,
+    deleteComment,
+    updateComment
 };

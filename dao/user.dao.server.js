@@ -1,5 +1,5 @@
 const userModel = require('../models/user.model.server');
-
+const mongoose = require('mongoose');
 truncateUsers = () =>
     userModel.deleteMany();
 
@@ -10,16 +10,15 @@ findAllUsers = () =>
     userModel.find();
 
 findUserById = userId =>
-    userModel.findOne({_id: parseInt(userId)});
+    userModel.findById(mongoose.Types.ObjectId(userId));
 
 deleteUser = userId =>
-    userModel.deleteOne({_id: parseInt(userId)});
+    userModel.deleteOne({_id: mongoose.Types.ObjectId(userId)});
 
 updateUser = (userId, user) => {
-  userModel.updateOne(
-    {_id: parseInt(userId)},
-    {$set: user}
-  )
+  return userModel.updateOne(
+    {_id: mongoose.Types.ObjectId(userId)},
+    {$set: user})
 };
 
 module.exports = {
