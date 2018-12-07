@@ -12,6 +12,12 @@ findAllUsers = () =>
 findUserById = userId =>
     userModel.findById(mongoose.Types.ObjectId(userId));
 
+findUserByUsername = username =>
+    userModel.find({username: username});
+
+findUsernamePassword = (username, password) =>
+    userModel.find({username: username, password: password});
+
 deleteUser = userId =>
     userModel.deleteOne({_id: mongoose.Types.ObjectId(userId)});
 
@@ -27,5 +33,7 @@ module.exports = {
     findAllUsers,
     findUserById,
     deleteUser,
-    updateUser
+    updateUser,
+    findUserByUsername,
+    findUsernamePassword
 };

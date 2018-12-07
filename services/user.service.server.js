@@ -26,6 +26,18 @@ module.exports = app => {
             .then(user => res.json(user))
     };
 
+    findUserByUsername = (req, res) => {
+        return userDao.findUserByUsername(req.params['username'])
+            .then(user => res.json(user));
+    };
+
+    findUsernamePassword = (req, res) => {
+        return userDao.findUsernamePassword(
+            req.body.username,
+            req.body.password)
+            .then(user => res.json(user));
+    };
+
     deleteUser = (req, res) =>
         async.waterfall(
             [
@@ -56,6 +68,8 @@ module.exports = app => {
     app.post('/api/user', createUser);
     app.get('/api/user', findAllUsers);
     app.get('/api/user/:userId', findUserById);
+    app.get('/api/username/:username', findUserByUsername);
     app.put('/api/user/:userId', updateUser);
     app.delete('/api/user/:userId', deleteUser);
+    app.post('/api/login', findUsernamePassword)
 };
