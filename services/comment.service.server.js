@@ -14,7 +14,8 @@ module.exports = app => {
                 }
             ],
             () => {
-                findAllComments(req, res);
+                // findAllComments(req, res);
+                findCommentByTVSeries(req, res);
             });
 
     findAllComments = (req, res) => {
