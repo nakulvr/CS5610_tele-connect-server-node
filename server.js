@@ -21,21 +21,21 @@ app.use(session({
 setSession = (req, res) => {
     let name = req.params['name'];
     req.session[name] = req.params['value'];
-    res.send(req.session);
+    res.json(req.session);
 };
 setSessionObject = (req, res) => {
     let name = req.params['name'];
     req.session[name] = req.body;
-    res.send(req.session);
+    res.json(req.session);
 };
 getSession = (req, res) => {
     let name = req.params['name'];
     let value = req.session[name];
-    res.send(value);
+    res.json(value);
 };
 
 getSessionAll = (req, res) => {
-  res.send(req.session);
+  res.json(req.session);
 };
 
 resetAllSessions = (req, res) => {
