@@ -54,6 +54,9 @@ tvseriesService(app);
 const commentService = require('./services/comment.service.server');
 commentService(app);
 
+const favouriteService = require('./services/favourite.service.server');
+favouriteService(app);
+
 app.get('/api/session/set/:name/:value', setSession);
 app.post('/api/session/set/:name', setSessionObject);
 app.get('/api/session/get/:name', getSession);
