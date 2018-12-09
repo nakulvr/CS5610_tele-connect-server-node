@@ -8,12 +8,12 @@ module.exports = app => {
     createFollower = (req, res) =>
         async.waterfall([
             (callback) => {
-                followDao.findFollower(req.params['userId'], req.params['followerId'])
+                followDao.findFollower(req.params['followerId'], req.params['userId'])
                     .then(result => {
                         if(result.length === 0) {
                             followDao.createFollower(
-                                req.params['userId'],
-                                req.params['followerId'])
+                                req.params['followerId'],
+                                req.params['userId'])
                                 .then(result => callback(null, result))
                         }
                         else {
@@ -47,7 +47,9 @@ module.exports = app => {
 
     findFollow = (req, res) =>
         followDao.findFollow(req.params['userId'])
-            .then(result => res.json(result))
+            .then(result => res.json(result));
 
+    app.get('/api/user/:userId/following/:followingId/follow', createFollowing)
     app.get('/api/user/:userId/follower/:followerId/follow', createFollower)
+    app.get('/api/user/:userId/follow', findFollow);
 };

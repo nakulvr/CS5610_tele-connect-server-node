@@ -2,7 +2,7 @@ const followModel = require('../models/follow.model.server');
 const mongoose = require('mongoose');
 
 createFollower = (userId, followerId) => {
-    return findFollow(userId)
+    return findFollow1(userId)
         .then(result => {
             if (result.length === 0) {
                 return followModel.create({user: mongoose.Types.ObjectId(userId)})
@@ -17,7 +17,7 @@ createFollower = (userId, followerId) => {
 };
 
 createFollowing = (userId, followingId) => {
-    return findFollow(userId)
+    return findFollow1(userId)
         .then(result => {
             if (result.length === 0) {
                 return followModel.create({user: mongoose.Types.ObjectId(userId)})
@@ -38,6 +38,9 @@ deleteFollower = (userId, followerId) =>
 deleteFollowing = (userId, followingId) =>
     followModel.updateOne({user: mongoose.Types.ObjectId(userId)},
         {$pull: {following: mongoose.Types.ObjectId(followingId)}});
+
+findFollow1 = userId =>
+    followModel.find({user: {_id: mongoose.Types.ObjectId(userId)}})
 
 findFollow = userId =>
     followModel.find({user: {_id: mongoose.Types.ObjectId(userId)}})
