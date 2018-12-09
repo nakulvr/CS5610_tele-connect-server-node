@@ -22,7 +22,7 @@ module.exports = app => {
                 }
             ],
             () => {
-                findAllFavourites(req, res)
+                findFavouriteByUser(req, res)
             });
 
     findAllFavourites = (req, res) =>
