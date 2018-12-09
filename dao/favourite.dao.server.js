@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 createFavourite = (userId, tvseriesId) =>
     // favouriteModel.create({user: userId, $push:{tvseries: tvseriesId}});
 {
-    return findFavouriteByUser(userId)
+    return findFavouriteByUser1(userId)
         .then(result => {
             if (result.length === 0) {
                 // console.log(result);
@@ -27,6 +27,9 @@ findAllFavourite = () =>
         .populate('user')
         .populate('tvseries')
         .exec();
+
+findFavouriteByUser1 = (userId) =>
+    favouriteModel.find({user: {_id: mongoose.Types.ObjectId(userId)}});
 
 findFavouriteByUser = (userId) => {
     return favouriteModel.find({user: {_id: mongoose.Types.ObjectId(userId)}})
