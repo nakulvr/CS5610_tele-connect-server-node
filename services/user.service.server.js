@@ -73,7 +73,7 @@ module.exports = app => {
     app.get('/api/user', findAllUsers);
     app.get('/api/user/:userId', findUserById);
     app.get('/api/username/:username', findUserByUsername);
-    app.get('/api/username/:username/admin', findUserAdmin);
+    app.get('/api/username/:userId/admin', findUserAdmin);
     app.put('/api/user/:userId', updateUser);
     app.delete('/api/user/:userId', deleteUser);
     app.post('/api/login', findUsernamePassword)
