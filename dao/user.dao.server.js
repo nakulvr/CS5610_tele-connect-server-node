@@ -21,6 +21,9 @@ findUsernamePassword = (username, password) =>
 deleteUser = userId =>
     userModel.deleteOne({_id: mongoose.Types.ObjectId(userId)});
 
+findUserAdmin = userId =>
+    userModel.findOne({_id: mongoose.Types.ObjectId(userId), type: 'ADMIN'});
+
 updateUser = (userId, user) => {
   return userModel.updateOne(
     {_id: mongoose.Types.ObjectId(userId)},
@@ -35,5 +38,6 @@ module.exports = {
     deleteUser,
     updateUser,
     findUserByUsername,
-    findUsernamePassword
+    findUsernamePassword,
+    findUserAdmin
 };

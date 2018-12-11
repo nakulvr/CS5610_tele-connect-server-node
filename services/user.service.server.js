@@ -38,6 +38,10 @@ module.exports = app => {
             .then(user => res.json(user));
     };
 
+    findUserAdmin = (req, res) =>
+        userDao.findUserAdmin(req.params['userId'])
+            .then(user => res.json(user));
+
     deleteUser = (req, res) =>
         async.waterfall(
             [
@@ -69,6 +73,7 @@ module.exports = app => {
     app.get('/api/user', findAllUsers);
     app.get('/api/user/:userId', findUserById);
     app.get('/api/username/:username', findUserByUsername);
+    app.get('/api/username/:username/admin', findUserAdmin);
     app.put('/api/user/:userId', updateUser);
     app.delete('/api/user/:userId', deleteUser);
     app.post('/api/login', findUsernamePassword)
