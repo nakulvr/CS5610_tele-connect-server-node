@@ -73,9 +73,15 @@ module.exports = app => {
         followDao.findFollow(req.params['userId'])
             .then(result => res.json(result));
 
+    findFollowing = (req, res) =>
+        followDao.findFollowing(req.params['userId'],
+            req.params['followingId'])
+            .then(result => res.json(result));
+
     app.get('/api/user/:userId/following/:followingId/follow', createFollowing);
     app.get('/api/user/:userId/follower/:followerId/follow', createFollower);
     app.get('/api/user/:userId/following/:followingId/unfollow', userUnfollowing);
     app.get('/api/user/:userId/follower/:followerId/unfollow', userUnfollower);
+    app.get('/api/user/:userId/following/:followingId', findFollowing);
     app.get('/api/user/:userId/follow', findFollow);
 };
