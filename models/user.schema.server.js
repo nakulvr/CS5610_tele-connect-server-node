@@ -5,6 +5,6 @@ const userSchema = mongoose.Schema({
     firstName: String,
     lastName: String,
     email: String,
-    type: {type: String, enum: ['FAN', 'ADMIN']}
+    type: {type: String, enum: ['FAN', 'ADMIN'], default: 'FAN'}
 }, {collection: 'user'});
 module.exports = userSchema;
