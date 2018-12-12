@@ -43,7 +43,7 @@ findFollow1 = userId =>
     followModel.find({user: {_id: mongoose.Types.ObjectId(userId)}})
 
 findFollow = userId =>
-    followModel.find({user: {_id: mongoose.Types.ObjectId(userId)}})
+    followModel.findOne({user: {_id: mongoose.Types.ObjectId(userId)}})
         .populate('user')
         .populate('following')
         .populate('followers')
